@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package message;
+
+option go_package = "/;proto";
+
+import "event.proto";
+import "machine.proto";
+import "repeater.proto";
+
+// NodeBootMsg 节点启动事件
+message NodeBootMsg {
+    event.Event event = 1;  // 事件类型
+    int64 ts = 2;           // 发生时间(unix-time)
+}
+
+// RepeaterServerInfoReq 请求代理服务器的信息
+message RepeaterServerInfoReq {
+    machine.Machine id = 1;   // 自己的node信息
+}
+
+// RepeaterServerInfoRsp 代理服务器信息返回
+message RepeaterServerInfoRsp {
+  repeated repeater.RepeaterServerNode servers = 1; // 当前所有 serverNode 的信息
+}

@@ -4,9 +4,6 @@
 // 	protoc        v3.18.0
 // source: machine.proto
 
-// 作用域在 protobuf 内的包名，
-// 用于 pkgA.Student 中想引用 pkgB.Student 的情况
-
 package proto
 
 import (

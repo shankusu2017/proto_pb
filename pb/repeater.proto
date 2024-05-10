@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package repeater;
+
+option go_package = "/;proto";
+
+// RepeaterServerNode 单个服务器信息
+message RepeaterServerNode {
+    string IPv4 = 1;  // ipv4地址
+}
