@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+// 作用域在 protobuf 内的包名，
+// 用于 pkgA.Student 中想引用 pkgB.Student 的情况
+package machine;
+
+// 生产的go代码存放在哪个目录下
+// protoc  --go_out=./proto/pb_go machine.proto 的命令
+// 意味着生成的go文件，存放到./proto/pb_go//目录下，包名为 proto
+// 文件名为 machine.pb.go
+option go_package = "/;proto";
+
+message Machine {
+    string UUID = 1;
+}
