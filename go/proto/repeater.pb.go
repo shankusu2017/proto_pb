@@ -20,7 +20,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// RepeaterServerNode 单个 服务器的信息
+// RepeaterServerNode 单个服务器信息
 type RepeaterServerNode struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

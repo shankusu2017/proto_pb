@@ -8,18 +8,25 @@ import "event.proto";
 import "machine.proto";
 import "repeater.proto";
 
-// NodeBootMsg 节点启动事件
-message NodeBootMsg {
-    event.Event event = 1;  // 事件类型
-    int64 ts = 2;           // 发生时间(unix-time)
+// 消息ID-唯一
+enum MsgID {
+  RepeaterServerInfoReq = 0;
+  RepeaterServerInfoRsp = 1;
+  EventPost = 2;
 }
 
 // RepeaterServerInfoReq 请求代理服务器的信息
-message RepeaterServerInfoReq {
+message MsgRepeaterServerInfoReq {
     machine.Machine id = 1;   // 自己的node信息
 }
 
 // RepeaterServerInfoRsp 代理服务器信息返回
-message RepeaterServerInfoRsp {
+message MsgRepeaterServerInfoRsp {
   repeated repeater.RepeaterServerNode servers = 1; // 当前所有 serverNode 的信息
+}
+
+// 事件报告
+message MsgEventPost {
+    event.Event event = 1;
+    int64 ts = 2;           // 发生时间(unix-time)
 }
