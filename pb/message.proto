@@ -26,10 +26,3 @@ message MsgRepeaterServerInfoReq {
 message MsgRepeaterServerInfoRsp {
   repeated repeater.RepeaterServerNode servers = 1; // 当前所有 serverNode 的信息
 }
-
-// KeepAlive 消息
-message MsgKeepAlive {
-  string role = 1;              // 角色 pac 还是 repeater
-  machine.Machine machine = 2;  // 机器信息(必须唯一)
-  node.Node node = 3;            // 节点消息(软件版本，自己的角色类型等)
-}
