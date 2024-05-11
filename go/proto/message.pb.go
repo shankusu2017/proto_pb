@@ -20,56 +20,6 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// 消息ID-唯一
-type MsgID int32
-
-const (
-	MsgID_EventPost             MsgID = 0
-	MsgID_RepeaterServerInfoReq MsgID = 1
-	MsgID_RepeaterServerInfoRsp MsgID = 2
-)
-
-// Enum value maps for MsgID.
-var (
-	MsgID_name = map[int32]string{
-		0: "EventPost",
-		1: "RepeaterServerInfoReq",
-		2: "RepeaterServerInfoRsp",
-	}
-	MsgID_value = map[string]int32{
-		"EventPost":             0,
-		"RepeaterServerInfoReq": 1,
-		"RepeaterServerInfoRsp": 2,
-	}
-)
-
-func (x MsgID) Enum() *MsgID {
-	p := new(MsgID)
-	*p = x
-	return p
-}
-
-func (x MsgID) String() string {
-	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
-}
-
-func (MsgID) Descriptor() protoreflect.EnumDescriptor {
-	return file_message_proto_enumTypes[0].Descriptor()
-}
-
-func (MsgID) Type() protoreflect.EnumType {
-	return &file_message_proto_enumTypes[0]
-}
-
-func (x MsgID) Number() protoreflect.EnumNumber {
-	return protoreflect.EnumNumber(x)
-}
-
-// Deprecated: Use MsgID.Descriptor instead.
-func (MsgID) EnumDescriptor() ([]byte, []int) {
-	return file_message_proto_rawDescGZIP(), []int{0}
-}
-
 // 事件报告
 type MsgEventPost struct {
 	state         protoimpl.MessageState
@@ -238,6 +188,70 @@ func (x *MsgRepeaterServerInfoRsp) GetServers() []*RepeaterServerNode {
 	return nil
 }
 
+// KeepAlive 消息
+type MsgKeepAlive struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Role    string   `protobuf:"bytes,1,opt,name=role,proto3" json:"role,omitempty"`       // 角色 pac 还是 repeater
+	Machine *Machine `protobuf:"bytes,2,opt,name=machine,proto3" json:"machine,omitempty"` // 机器信息(必须唯一)
+	Node    *Node    `protobuf:"bytes,3,opt,name=node,proto3" json:"node,omitempty"`       // 节点消息(软件版本，自己的角色类型等)
+}
+
+func (x *MsgKeepAlive) Reset() {
+	*x = MsgKeepAlive{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_message_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *MsgKeepAlive) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*MsgKeepAlive) ProtoMessage() {}
+
+func (x *MsgKeepAlive) ProtoReflect() protoreflect.Message {
+	mi := &file_message_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use MsgKeepAlive.ProtoReflect.Descriptor instead.
+func (*MsgKeepAlive) Descriptor() ([]byte, []int) {
+	return file_message_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *MsgKeepAlive) GetRole() string {
+	if x != nil {
+		return x.Role
+	}
+	return ""
+}
+
+func (x *MsgKeepAlive) GetMachine() *Machine {
+	if x != nil {
+		return x.Machine
+	}
+	return nil
+}
+
+func (x *MsgKeepAlive) GetNode() *Node {
+	if x != nil {
+		return x.Node
+	}
+	return nil
+}
+
 var File_message_proto protoreflect.FileDescriptor
 
 var file_message_proto_rawDesc = []byte{
@@ -264,13 +278,15 @@ var file_message_proto_rawDesc = []byte{
 	0x66, 0x6f, 0x52, 0x73, 0x70, 0x12, 0x36, 0x0a, 0x07, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x73,
 	0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1c, 0x2e, 0x72, 0x65, 0x70, 0x65, 0x61, 0x74, 0x65,
 	0x72, 0x2e, 0x52, 0x65, 0x70, 0x65, 0x61, 0x74, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72,
-	0x4e, 0x6f, 0x64, 0x65, 0x52, 0x07, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x73, 0x2a, 0x4c, 0x0a,
-	0x05, 0x4d, 0x73, 0x67, 0x49, 0x44, 0x12, 0x0d, 0x0a, 0x09, 0x45, 0x76, 0x65, 0x6e, 0x74, 0x50,
-	0x6f, 0x73, 0x74, 0x10, 0x00, 0x12, 0x19, 0x0a, 0x15, 0x52, 0x65, 0x70, 0x65, 0x61, 0x74, 0x65,
-	0x72, 0x53, 0x65, 0x72, 0x76, 0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x71, 0x10, 0x01,
-	0x12, 0x19, 0x0a, 0x15, 0x52, 0x65, 0x70, 0x65, 0x61, 0x74, 0x65, 0x72, 0x53, 0x65, 0x72, 0x76,
-	0x65, 0x72, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x73, 0x70, 0x10, 0x02, 0x42, 0x09, 0x5a, 0x07, 0x2f,
-	0x3b, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x4e, 0x6f, 0x64, 0x65, 0x52, 0x07, 0x73, 0x65, 0x72, 0x76, 0x65, 0x72, 0x73, 0x22, 0x6e, 0x0a,
+	0x0c, 0x4d, 0x73, 0x67, 0x4b, 0x65, 0x65, 0x70, 0x41, 0x6c, 0x69, 0x76, 0x65, 0x12, 0x12, 0x0a,
+	0x04, 0x72, 0x6f, 0x6c, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x72, 0x6f, 0x6c,
+	0x65, 0x12, 0x2a, 0x0a, 0x07, 0x6d, 0x61, 0x63, 0x68, 0x69, 0x6e, 0x65, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x10, 0x2e, 0x6d, 0x61, 0x63, 0x68, 0x69, 0x6e, 0x65, 0x2e, 0x4d, 0x61, 0x63,
+	0x68, 0x69, 0x6e, 0x65, 0x52, 0x07, 0x6d, 0x61, 0x63, 0x68, 0x69, 0x6e, 0x65, 0x12, 0x1e, 0x0a,
+	0x04, 0x6e, 0x6f, 0x64, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0a, 0x2e, 0x6e, 0x6f,
+	0x64, 0x65, 0x2e, 0x4e, 0x6f, 0x64, 0x65, 0x52, 0x04, 0x6e, 0x6f, 0x64, 0x65, 0x42, 0x09, 0x5a,
+	0x07, 0x2f, 0x3b, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -285,13 +301,12 @@ func file_message_proto_rawDescGZIP() []byte {
 	return file_message_proto_rawDescData
 }
 
-var file_message_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_message_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_message_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_message_proto_goTypes = []interface{}{
-	(MsgID)(0),                       // 0: message.MsgID
-	(*MsgEventPost)(nil),             // 1: message.MsgEventPost
-	(*MsgRepeaterServerInfoReq)(nil), // 2: message.MsgRepeaterServerInfoReq
-	(*MsgRepeaterServerInfoRsp)(nil), // 3: message.MsgRepeaterServerInfoRsp
+	(*MsgEventPost)(nil),             // 0: message.MsgEventPost
+	(*MsgRepeaterServerInfoReq)(nil), // 1: message.MsgRepeaterServerInfoReq
+	(*MsgRepeaterServerInfoRsp)(nil), // 2: message.MsgRepeaterServerInfoRsp
+	(*MsgKeepAlive)(nil),             // 3: message.MsgKeepAlive
 	(Event)(0),                       // 4: event.Event
 	(*Machine)(nil),                  // 5: machine.Machine
 	(*Node)(nil),                     // 6: node.Node
@@ -303,11 +318,13 @@ var file_message_proto_depIdxs = []int32{
 	6, // 2: message.MsgEventPost.node:type_name -> node.Node
 	5, // 3: message.MsgRepeaterServerInfoReq.machine:type_name -> machine.Machine
 	7, // 4: message.MsgRepeaterServerInfoRsp.servers:type_name -> repeater.RepeaterServerNode
-	5, // [5:5] is the sub-list for method output_type
-	5, // [5:5] is the sub-list for method input_type
-	5, // [5:5] is the sub-list for extension type_name
-	5, // [5:5] is the sub-list for extension extendee
-	0, // [0:5] is the sub-list for field type_name
+	5, // 5: message.MsgKeepAlive.machine:type_name -> machine.Machine
+	6, // 6: message.MsgKeepAlive.node:type_name -> node.Node
+	7, // [7:7] is the sub-list for method output_type
+	7, // [7:7] is the sub-list for method input_type
+	7, // [7:7] is the sub-list for extension type_name
+	7, // [7:7] is the sub-list for extension extendee
+	0, // [0:7] is the sub-list for field type_name
 }
 
 func init() { file_message_proto_init() }
@@ -356,20 +373,31 @@ func file_message_proto_init() {
 				return nil
 			}
 		}
+		file_message_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MsgKeepAlive); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_message_proto_rawDesc,
-			NumEnums:      1,
-			NumMessages:   3,
+			NumEnums:      0,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_message_proto_goTypes,
 		DependencyIndexes: file_message_proto_depIdxs,
-		EnumInfos:         file_message_proto_enumTypes,
 		MessageInfos:      file_message_proto_msgTypes,
 	}.Build()
 	File_message_proto = out.File
