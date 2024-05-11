@@ -26,7 +26,7 @@ message MsgEventPost {
 
 // RepeaterServerInfoReq 请求代理服务器的信息
 message MsgRepeaterServerInfoReq {
-    machine.Machine id = 1;   // 自己的node信息
+    machine.Machine machine = 1;   // 自己的node信息
 }
 
 // RepeaterServerInfoRsp 代理服务器信息返回
