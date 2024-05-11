@@ -27,6 +27,7 @@ message MsgRepeaterServerInfoRsp {
 
 // 事件报告
 message MsgEventPost {
-    event.Event event = 1;
-    int64 ts = 2;           // 发生时间(unix-time)
+    event.Event event = 1;  // 事件类型
+    int64 ts = 2;           // 发生时间(unix-time-毫秒)
+    machine.Machine machine = 3;  // 机器信息
 }
