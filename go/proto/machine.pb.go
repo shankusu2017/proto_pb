@@ -25,7 +25,7 @@ type Machine struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	UUID string `protobuf:"bytes,1,opt,name=UUID,proto3" json:"UUID,omitempty"`
+	UUID string `protobuf:"bytes,1,opt,name=UUID,proto3" json:"UUID,omitempty"` // 一台机器应该有唯一值
 }
 
 func (x *Machine) Reset() {

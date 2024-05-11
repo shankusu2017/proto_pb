@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package node;
+
+option go_package = "/;proto";
+
+message Node {
+  string Ver = 1; // 版本
+}

@@ -7,12 +7,21 @@ option go_package = "/;proto";
 import "event.proto";
 import "machine.proto";
 import "repeater.proto";
+import "node.proto";
 
 // 消息ID-唯一
 enum MsgID {
-  RepeaterServerInfoReq = 0;
-  RepeaterServerInfoRsp = 1;
-  EventPost = 2;
+  EventPost = 0;
+  RepeaterServerInfoReq = 1;
+  RepeaterServerInfoRsp = 2;
+}
+
+// 事件报告
+message MsgEventPost {
+  event.Event event = 1;  // 事件类型
+  int64 ts = 2;           // 发生时间(unix-time-毫秒)
+  machine.Machine machine = 3;  // 机器信息(必须唯一)
+  node.Node node = 4;   // 节点消息(软件版本，自己的角色类型等)
 }
 
 // RepeaterServerInfoReq 请求代理服务器的信息
@@ -23,11 +32,4 @@ message MsgRepeaterServerInfoReq {
 // RepeaterServerInfoRsp 代理服务器信息返回
 message MsgRepeaterServerInfoRsp {
   repeated repeater.RepeaterServerNode servers = 1; // 当前所有 serverNode 的信息
-}
-
-// 事件报告
-message MsgEventPost {
-    event.Event event = 1;  // 事件类型
-    int64 ts = 2;           // 发生时间(unix-time-毫秒)
-    machine.Machine machine = 3;  // 机器信息
 }
