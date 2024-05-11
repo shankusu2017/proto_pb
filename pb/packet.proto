@@ -7,8 +7,8 @@ option go_package = "/;proto";
 // 8.bit + 8.bit(flag) + 16.bit(type)
 enum PacketFlag {
   NULL    = 0;
-  IP      = 1; // 普通的IP包
-  PING    = 2;
+  PING    = 1;
+  IP      = 2; // 普通的IP包
   SEQ = 65536;
   ACK = 131072; // 65536*2
 }
