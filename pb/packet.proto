@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package packet;
+
+option go_package = "/;proto";
+
+// 8.bit + 8.bit(flag) + 16.bit(type)
+enum PacketFlag {
+  NULL    = 0;
+  IP      = 1; // 普通的IP包
+  PING    = 2;
+  SEQ = 65536;
+  ACK = 131072; // 65536*2
+}
+
+// 报文
+message Packet {
+  uint64 type = 1;    // 类型
+  string uuid = 2;    // uuid标识符（对于发送方来说唯一）,长度为 constant.UUID_MACHINE_LENGTH * 2
+  bytes load = 3;
+}
