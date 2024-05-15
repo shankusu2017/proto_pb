@@ -4,7 +4,13 @@ package node;
 
 option go_package = "/;proto";
 
+enum Role {
+  Default = 0;
+  Pac = 1;
+  Repeater = 65535;
+}
+
 message Node {
   string Ver = 1;   // 版本
-  string role = 2;  // 角色
+  Role role = 2;    // 角色
 }
