@@ -7,7 +7,7 @@ option go_package = "/;proto";
 enum Role {
   Default = 0;
   Pac = 1;
-  Repeater = 65535;
+  Repeater = 1000;
 }
 
 message Node {
