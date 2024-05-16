@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package net;
+
+option go_package = "/;proto";
+
+message Net {
+  int32 SubId = 1;   // 子网号
+}
