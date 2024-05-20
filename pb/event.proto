@@ -4,8 +4,15 @@ package event;
 
 option go_package = "/;proto";
 
+// 事件类型
 enum Event {
-  STARTED = 0;
-  KEEPALIVE = 1;
-  CLOSED = 65535;
+  STARTED = 0;  /* 主机等启动 */
+  KEEPALIVE = 1;  /* 心跳事件 */
+  PINGLOSTPERCENT20 = 1000;  /* NODE 之间 PING 包丢失达到20% */
+  CLOSED = 65535; /* 主机关闭 */
+}
+
+// 事件的附加信息
+message EventMsg {
+  string Msg = 1; /* 事件描述 */
 }

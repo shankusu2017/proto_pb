@@ -8,14 +8,14 @@ option go_package = "/;proto";
 enum PacketFlag {
   NULL    = 0;
   PING    = 1;
-  IP      = 2; // 普通的IP包
+  IP      = 2; /* 普通的IP包 */
   SEQ = 65536;
-  ACK = 131072; // 65536*2
+  ACK = 131072; /* 65536*2 */
 }
 
 // 报文
 message Packet {
-  uint64 type = 1;    // 类型
-  string uuid = 2;    // uuid标识符（对于发送方来说唯一）,长度为 constant.UUID_MACHINE_LENGTH * 2
+  uint64 type = 1;    /* 类型 */
+  string uuid = 2;    /* uuid标识符（对于发送方来说唯一）,长度为 constant.UUID_MACHINE_LENGTH * 2 */
   bytes load = 3;
 }

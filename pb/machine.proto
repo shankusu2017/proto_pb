@@ -5,5 +5,5 @@ package machine;
 option go_package = "/;proto";
 
 message Machine {
-    string UUID = 1;    // 一台机器应该有唯一值
+    string UUID = 1;    /* 一台机器应该有唯一值 */
 }

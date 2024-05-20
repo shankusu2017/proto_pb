@@ -12,25 +12,26 @@ import "net.proto";
 
 // 事件报告
 message MsgEventPost {
-  event.Event event = 1;  // 事件类型
-  int64 ts = 2;           // 发生时间(unix-time-毫秒)
-  machine.Machine machine = 3;  // 机器信息(必须唯一)
-  node.Node node = 4;   // 节点消息(软件版本，自己的角色类型等)
+  event.Event event = 1;  /* 事件类型 */
+  int64 ts = 2;           /* 发生时间(unix-time-毫秒) */
+  machine.Machine machine = 3;  /* 机器信息(必须唯一) */
+  node.Node node = 4;   /* 节点消息(软件版本，自己的角色类型等) */
+  event.EventMsg Msg = 5;  /* 事件附带的详细信息 */
 }
 
 message MsgEventRsp {
-  event.Event event = 1;  // 事件类型
-  machine.Machine machine = 2;  // 机器信息(必须唯一)
+  event.Event event = 1;  /* 事件类型 */
+  machine.Machine machine = 2;  /* 机器信息(必须唯一) */
   node.Node node = 3;
   net.Net net = 4;
 }
 
 // RepeaterServerInfoReq 请求代理服务器的信息
 message MsgRepeaterServerInfoReq {
-    machine.Machine machine = 1;   // 自己的node信息
+    machine.Machine machine = 1;   /* 自己的node信息 */
 }
 
 // RepeaterServerInfoRsp 代理服务器信息返回
 message MsgRepeaterServerInfoRsp {
-  repeated repeater.RepeaterServerNode servers = 1; // 当前所有 serverNode 的信息
+  repeated repeater.RepeaterServerNode servers = 1; /* 当前所有 serverNode 的信息 */
 }

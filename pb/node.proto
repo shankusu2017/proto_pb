@@ -11,6 +11,6 @@ enum Role {
 }
 
 message Node {
-  string Ver = 1;   // 版本
-  Role role = 2;    // 角色
+  string Ver = 1;   /* 版本 */
+  Role role = 2;    /* 角色 */
 }
