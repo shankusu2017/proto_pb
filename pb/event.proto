@@ -9,6 +9,7 @@ enum Event {
   STARTED = 0;  /* 主机等启动 */
   KEEPALIVE = 1;  /* 心跳事件 */
   PINGLOSTPERCENT20 = 1000;  /* NODE 之间 PING 包丢失达到20% */
+  PINGACKNULL = 1001; /* NODE 之间 PING 包全丢 */
   CLOSED = 65535; /* 主机关闭 */
 }
 
